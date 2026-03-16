@@ -117,56 +117,56 @@ export class Helper {
 	 * @param id
 	 * @returns
 	 */
-	public static async mysqlRelationCheck(
-		fkMetadataKey: keyof typeof fkMetadata,
-		id: number,
-	) {
-		const checkOutput: I_MysqlRelationCheck = {
-			total_records: 0,
-			records: [],
-		};
+	// public static async mysqlRelationCheck(
+	// 	fkMetadataKey: keyof typeof fkMetadata,
+	// 	id: number,
+	// ) {
+	// 	const checkOutput: I_MysqlRelationCheck = {
+	// 		total_records: 0,
+	// 		records: [],
+	// 	};
 
-		const foreignKeys = Object.values(
-			fkMetadata[fkMetadataKey].reduce(
-				(acc, curr) => {
-					const key = `${curr.table}_${curr.model.name}`;
-					if (!acc[key]) {
-						acc[key] = {
-							table: curr.table,
-							model: curr.model,
-							columns: [],
-						};
-					}
-					acc[key].columns.push(curr.column);
-					return acc;
-				},
-				{} as Record<
-					string,
-					{ table: string; model: any; columns: string[] }
-				>,
-			),
-		);
+	// 	const foreignKeys = Object.values(
+	// 		fkMetadata[fkMetadataKey].reduce(
+	// 			(acc, curr) => {
+	// 				const key = `${curr.table}_${curr.model.name}`;
+	// 				if (!acc[key]) {
+	// 					acc[key] = {
+	// 						table: curr.table,
+	// 						model: curr.model,
+	// 						columns: [],
+	// 					};
+	// 				}
+	// 				acc[key].columns.push(curr.column);
+	// 				return acc;
+	// 			},
+	// 			{} as Record<
+	// 				string,
+	// 				{ table: string; model: any; columns: string[] }
+	// 			>,
+	// 		),
+	// 	);
 
-		for (const fk of foreignKeys) {
-			const { table, model, columns } = fk;
+	// 	for (const fk of foreignKeys) {
+	// 		const { table, model, columns } = fk;
 
-			const where = {
-				[Op.or]: columns.map((col) => ({
-					[col]: id,
-				})),
-				deleted_at: null,
-			};
+	// 		const where = {
+	// 			[Op.or]: columns.map((col) => ({
+	// 				[col]: id,
+	// 			})),
+	// 			deleted_at: null,
+	// 		};
 
-			const count = await model.count({ where });
-			checkOutput.total_records += count;
-			checkOutput.records.push({
-				table_name: table,
-				count,
-			});
-		}
+	// 		const count = await model.count({ where });
+	// 		checkOutput.total_records += count;
+	// 		checkOutput.records.push({
+	// 			table_name: table,
+	// 			count,
+	// 		});
+	// 	}
 
-		return checkOutput;
-	}
+	// 	return checkOutput;
+	// }
 
 	/**
 	 * Generate Data Code
