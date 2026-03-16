@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+    monara-api:
+        image: bhaktibuana/monara-api:latest
+        container_name: monara-api
+        restart: on-failure
+        ports:
+            - 4020:4020
+        env_file:
+            - ../.env.prod
+        networks:
+            - monara_api_network
+
+networks:
+    monara_api_network:
+        name: monara_api_network
