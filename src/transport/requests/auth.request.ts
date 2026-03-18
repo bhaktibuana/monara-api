@@ -30,3 +30,16 @@ export class RegisterReqBody {
 	})
 	password_conf!: string;
 }
+
+export class LoginReqBody {
+	@IsString()
+	@IsNotEmpty()
+	email!: string;
+
+	@IsString()
+	@IsNotEmpty()
+	@Transform(({ value }) => {
+		return Helper.hash(value);
+	})
+	password!: string;
+}

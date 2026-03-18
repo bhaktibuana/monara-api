@@ -8,5 +8,6 @@ export class AuthRouter extends Router<AuthController> {
 		super(router, '/auth', new AuthController());
 
 		this.post('/register', this.controller.register);
+		this.post('/login', this.controller.login);
 	}
 }

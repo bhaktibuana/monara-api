@@ -14,4 +14,17 @@ export class AuthResponse {
 			email: payload.email,
 		};
 	}
+
+	/**
+	 * Auth Response - Login
+	 *
+	 * @param payload
+	 * @returns
+	 */
+	public login(payload: string | null) {
+		if (!payload) return null;
+		return {
+			access_token: payload,
+		};
+	}
 }

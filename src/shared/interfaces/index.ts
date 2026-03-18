@@ -30,9 +30,7 @@ export interface I_ModelWithAssociate {
 
 export interface I_User {
 	id: number;
-	username: string;
-	name: string;
-	role: string;
+	email: string;
 	is_active: boolean;
 }
 
