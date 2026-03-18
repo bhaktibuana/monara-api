@@ -9,5 +9,6 @@ export class AuthRouter extends Router<AuthController> {
 
 		this.post('/register', this.controller.register);
 		this.post('/login', this.controller.login);
+		this.post('/refresh', this.controller.refresh, ['auth']); // use refresh_token for authentication
 	}
 }

@@ -21,7 +21,23 @@ export class AuthResponse {
 	 * @param payload
 	 * @returns
 	 */
-	public login(payload: string | null) {
+	public login(
+		payload: { access_token: string; refresh_token: string } | null,
+	) {
+		if (!payload) return null;
+		return {
+			access_token: payload.access_token,
+			refresh_token: payload.refresh_token,
+		};
+	}
+
+	/**
+	 * Auth Response - Refresh access token
+	 *
+	 * @param payload
+	 * @returns
+	 */
+	public refresh(payload: string | null) {
 		if (!payload) return null;
 		return {
 			access_token: payload,

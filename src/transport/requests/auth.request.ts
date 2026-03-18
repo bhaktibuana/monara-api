@@ -43,3 +43,9 @@ export class LoginReqBody {
 	})
 	password!: string;
 }
+
+export class RefreshReqBody {
+	@IsString()
+	@IsNotEmpty()
+	refresh_token!: string;
+}

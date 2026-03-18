@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { Controller } from '@/shared/libs/controller.lib';
 import { AppStatusService } from '@/app/services';
 import { AppStatusResponse } from '@/transport/responses';
+import { Helper } from '@/shared/helpers';
 
 export class AppStatusController extends Controller {
 	private appStatusSvc: AppStatusService;
@@ -25,11 +26,16 @@ export class AppStatusController extends Controller {
 		try {
 			const result = await this.appStatusSvc.ping(res);
 
+			const ua = Helper.getDeviceInfo(_req.headers['user-agent'] || '');
+
 			this.response(
 				res,
 				'App Status',
 				this.STATUS_CODE.OK,
-				this.appStatusRes.ping(result),
+				// this.appStatusRes.ping(result),
+				{
+					ua,
+				},
 			);
 		} catch (error) {
 			await this.catchErrorHandler(res, error, this.ping.name);
